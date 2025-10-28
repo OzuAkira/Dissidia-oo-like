@@ -4,7 +4,7 @@
 erDiagram
   Player{
   int id PK
-  string name
+  string name PK
   int hP
   float attack
   float deffense
@@ -13,7 +13,7 @@ erDiagram
 
   Player_Ability{
   int id PK
-  int player_id FK
+  string player_name FK
   string name
   int remain
   bool isAttack
@@ -22,7 +22,7 @@ erDiagram
 }
 Enemy{
   int id PK
-  string name
+  string name PK
   int hP
   float attack
   float deffense
@@ -30,7 +30,7 @@ Enemy{
 }
 Enemy_Ability{
   int id PK
-  int enemy_id FK
+  string enemy_name FK
   string name
   bool isAttack
   float power
