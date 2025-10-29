@@ -7,8 +7,15 @@ erDiagram
   string name PK
   int hP
   float attack
+  float m_attack
   float deffense
+  float m_deffense
   float speed
+  int fire
+  int	ice
+  int	thunder
+  int	earth
+  int	wind
 }
 
   Player_Ability{
@@ -25,8 +32,15 @@ Enemy{
   string name PK
   int hP
   float attack
+  float m_attack
   float deffense
+  float m_deffense
   float speed
+  int fire
+  int	ice
+  int	thunder
+  int	earth
+  int	wind
 }
 Enemy_Ability{
   int id PK
