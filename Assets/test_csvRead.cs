@@ -10,7 +10,7 @@ public class test_csvRead : MonoBehaviour
     private TextAsset csvFile; // CSVファイル
     private List<string[]> csvData = new List<string[]>(); // CSVファイルの中身を入れるリスト
 
-    async Task Start()
+    async void Start()
     {
         csvFile = await Addressables.LoadAssetAsync<TextAsset>("svsets/PlayerParameters.csv").Task;
         StringReader reader = new StringReader(csvFile.text); // TextAssetをStringReaderに変換
@@ -19,7 +19,7 @@ public class test_csvRead : MonoBehaviour
         List<Dictionary<string, float>> table = new List<Dictionary<string, float>>();//テーブル（エクセルシート）
         List<string> calumns = new List<string>();
 
-        
+
 
 
         while (reader.Peek() != -1)
@@ -27,15 +27,25 @@ public class test_csvRead : MonoBehaviour
             string line = reader.ReadLine(); // 1行ずつ読み込む
             csvData.Add(line.Split(',')); // csvDataリストに追加する
         }
-        foreach(string c in csvData[0])
+        foreach (string c in csvData[0])
         {
             calumns.Add(c);
         }
-        for (int i = 0; i < csvData.Count; i++) // csvDataリストの条件を満たす値の数（全て）
+        Debug.Log(calumns.Count);
+        Debug.Log(csvData.Count);
+        for (int i = 1; i < csvData.Count; i++) // csvDataリストの条件を満たす値の数（全て）
         {
-            // データの表示
-            Debug.Log(csvData[i][0] + " " + csvData[i][1]);
-            Debug.Log("calumns= " + calumns[i]);
+            
+            for (int c = 0; c < calumns.Count; c++)
+            {
+                Debug.Log(calumns[c]+" "+csvData[i][c]);
+                table[i].Add(calumns[c],float.Parse(csvData[i-1][c]));
+            }
+        }
+        //Debug.Log("---");
+        for (int i = 0; i < 3; i++)
+        {
+            Debug.Log(table[i]["id"] + " " + table[i]["name"]);
         }
     }
 }
