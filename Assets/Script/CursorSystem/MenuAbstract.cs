@@ -12,11 +12,11 @@ public abstract class MenuAbstract : MonoBehaviour
         image = gameObject.GetComponent<Image>();
     }
     public abstract void Select();//決定ボタンを押したときの処理
-    void OnImage()
+    public void OnImage()
     {
         image.sprite = onImage;
     }
-    void OffImage()
+    public void OffImage()
     {
         image.sprite = offImage;
     }
