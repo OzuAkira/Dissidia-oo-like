@@ -47,13 +47,6 @@ public class CSVread : MonoBehaviour
         }
         isLoaded = true;//tableの読み込みが完了したときのフラグ
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            getCharactorData("侍","id");
-        }
-    }
     static public string getCharactorData(string name , string columns)//string型の変数を返す関数を定義
     {
         string ans = "None";
