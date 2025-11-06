@@ -102,3 +102,15 @@ GameMaster ->> +Enemy/Player_DB:攻撃対象のステータスを問い合わせ
 Enemy/Player_DB -->> -GameMaster:攻撃対象のステータスを返答
 GameMaster -->> -Player/Enemy:ダメージを計算して返答
 ```
+# キャラクターセレクトのアルゴリズム
+```mermaid
+flowchart TD
+
+start([ユーザがIconを選択])-->
+search_Icon[どのIconを選択したのか検索]-->
+foreach_Icon[/選択されたIcon以外を取得\]-->
+if_Icon{他のIconに使用されているキャラクターを検索}-- Nullの場合 --> null_menu[なにもしない]-->foreach_end[\---/]
+if_Icon{他のIconに使用されているキャラクターを検索}-- 検索がヒットした場合 --> block_charactor[そのキャラクターは選択できないようにする]-->foreach_end[\---/]-->
+select_menu[キャラクターリストを表示]-- キャンセルした場合 -->end_1[End]
+select_menu[キャラクターリストを表示]-- キャラクターを選択 -->set_charactor[そのIconに選択したキャラクターをセット]-->end_1[End] 
+```
