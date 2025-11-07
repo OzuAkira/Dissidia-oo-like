@@ -14,6 +14,7 @@ public class CursorArow : MonoBehaviour
     RectTransform cursorRect;
     void Start()
     {
+        menuArray = MenuDataList.menuStrage["mission1/home"];
         cursorRect = cursorObject.GetComponent<RectTransform>();
         UpdateMenu();
     }
