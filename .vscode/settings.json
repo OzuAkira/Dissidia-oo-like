@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "dissidia-oo-like.sln"
+    "dotnet.defaultSolution": "Dissidia-oo-like.slnx"
 }

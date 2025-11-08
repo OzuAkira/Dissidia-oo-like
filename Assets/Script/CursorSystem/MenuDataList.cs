@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class MenuDataList : MonoBehaviour
 {
+    public MenuDataBase menuDataBase;
     void Awake()
     {
         string sceneName = gameObject.scene.name;
-        addMenu(sceneName+"/home", rawData);//Mission開始ボタンやキャラクター選択をするメニュー
-        addMenu("charactorList",rawData);//その枠に入れるキャラクターを選択するメニュー
+        addMenu(sceneName+"/home", menuDataBase.menuRows[0]);//Mission開始ボタンやキャラクター選択をするメニュー
+        //addMenu("charactorList",menuDataBase.menuRows[1]);//その枠に入れるキャラクターを選択するメニュー
     }
-    public MenuAbstract[] rawData;// = new List<MenuAbstract[]>();//UnityEditerから変数を代入。ここは気合()
+    
     static public Dictionary<string, MenuAbstract[]> menuStrage = new Dictionary<string, MenuAbstract[]>();
-    static public void addMenu(string keyName, MenuAbstract[] menu)
+    static public void addMenu(string keyName, MenuRow menu)
     {
-        menuStrage.Add(keyName, menu);
+        menuStrage.Add(keyName, menu.items);
         Debug.Log("【メニューログ】menuStrageに「" + keyName + "」を追加しました");
     }
 }

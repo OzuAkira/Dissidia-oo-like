@@ -6,9 +6,10 @@ using UnityEngine.InputSystem;
 
 public class CursorArow : MonoBehaviour
 {
-    public GameObject cursorObject;
+    static string moveKey = "home";
+    static public GameObject cursorObject;
     public int cursorIndex = 0;
-    public MenuAbstract[] menuArray;
+    static public MenuAbstract[] menuArray;//後で消す
     bool isUp = false;
     bool isDown = false;
     RectTransform cursorRect;
@@ -22,10 +23,44 @@ public class CursorArow : MonoBehaviour
     public void OnMove(InputValue value)
     {
         var axis = value.Get<Vector2>();
-        if(axis.y == 1 && isDown ==false) isDown = true;//Menuは上から0,1,2と数えるからDown
-        else if(axis.y == -1 && isUp ==false) isUp = true;
+        if (axis.y == 1 && isDown == false) isDown = true;//Menuは上から0,1,2と数えるからDown
+        else if (axis.y == -1 && isUp == false) isUp = true;
+    }
+    void switchingMethod(string key)
+    {
+        switch (key)
+        {
+            case "home":
+                homeCursor();
+                break;
+        }
     }
     void Update()
+    {
+        switchingMethod(moveKey);
+    }
+    void OnFire()
+    {
+       // menu[_cursorIndex].select();
+      //  Debug.Log("test");
+    }
+    public void UpdateMenu()
+    {
+        int i = 0;
+        foreach (MenuAbstract menuTable in menuArray)
+        {
+            if (cursorIndex == i)
+            {
+                menuTable.OnImage();
+
+                cursorRect.anchoredPosition = menuTable.GetComponent<RectTransform>().anchoredPosition;//あとで消すかも...
+            }
+            else menuTable.OffImage();
+            i++;
+        }
+    }
+    
+    void homeCursor()
     {
         int oldCursor = cursorIndex;
         int cursorMax = menuArray.Length;
@@ -49,24 +84,10 @@ public class CursorArow : MonoBehaviour
         if (cursorIndex >= cursorMax) cursorIndex = 0;
         if (cursorIndex != oldCursor) UpdateMenu();
     }
-    void OnFire()
-    {
-       // menu[_cursorIndex].select();
-      //  Debug.Log("test");
-    }
-    public void UpdateMenu()
-    {
-        int i = 0;
-        foreach(MenuAbstract menuTable in menuArray)
-        {
-            if(cursorIndex == i)
-            {
-                menuTable.OnImage();
-                
-                cursorRect.anchoredPosition = menuTable.GetComponent<RectTransform>().anchoredPosition;//あとで消すかも...
-            }
-            else menuTable.OffImage();
-            i++;
-        }
-    }
+
+
+
+
+
+
 }
