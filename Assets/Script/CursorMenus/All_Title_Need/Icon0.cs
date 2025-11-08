@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Icon0 : MenuAbstract
 {
-    static public string name = "";
+    static public string selectedCharactorName = "";
     public override void Select()
     {
         
