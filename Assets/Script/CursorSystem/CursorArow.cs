@@ -6,15 +6,15 @@ using UnityEngine.InputSystem;
 
 public class CursorArow : MonoBehaviour
 {
-    static string moveKey = "home";
+    [SerializeField] GameObject startCursor;
     static public GameObject cursorObject;
     public int cursorIndex = 0;
     static public MenuAbstract[] menuArray;//後で消す
-    bool isUp = false;
-    bool isDown = false;
+    bool isUp = false , isDown = false , isLeft = false , isRight = false;
     RectTransform cursorRect;
     void Start()
     {
+        cursorObject = startCursor;
         menuArray = MenuDataList.menuStrage["mission1/home"];
         cursorRect = cursorObject.GetComponent<RectTransform>();
         UpdateMenu();
@@ -23,15 +23,22 @@ public class CursorArow : MonoBehaviour
     public void OnMove(InputValue value)
     {
         var axis = value.Get<Vector2>();
-        if (axis.y == 1 && isDown == false) isDown = true;//Menuは上から0,1,2と数えるからDown
-        else if (axis.y == -1 && isUp == false) isUp = true;
+        if (axis.y == 1 && isDown == false) isUp = true;
+        else if (axis.y == -1 && isUp == false) isDown = true;
+        else if (axis.x == 1 && isRight == false) isRight = true;
+        else if (axis.x == -1 && isLeft == false) isLeft = true;
     }
-    void switchingMethod(string key)
+    static string moveKey = "home";
+    [SerializeField] int cl_rowLentgh;//【重要な変数】キャラクターリストのIconが改行する場所を指定している //1_origin で指定すること
+    void switchingMethod(string key)//Keyに上記のmoveKeyを参照することで、動的にCursorの動きそのものを変えることが可能
     {
         switch (key)
         {
             case "home":
                 homeCursor();
+                break;
+            case "charactorList":
+                charactorCursor(cl_rowLentgh);
                 break;
         }
     }
@@ -41,8 +48,7 @@ public class CursorArow : MonoBehaviour
     }
     void OnFire()
     {
-       // menu[_cursorIndex].select();
-      //  Debug.Log("test");
+       menuArray[cursorIndex].Select();
     }
     public void UpdateMenu()
     {
@@ -59,28 +65,53 @@ public class CursorArow : MonoBehaviour
             i++;
         }
     }
-    
+
     void homeCursor()
     {
         int oldCursor = cursorIndex;
         int cursorMax = menuArray.Length;
-        if(isUp)
-        {
-            cursorIndex++;
-            isUp = false;
-        }
-        else if(isDown)
+        if (isUp)
         {
             cursorIndex--;
+            isUp = false;
+        }
+        else if (isDown)
+        {
+            cursorIndex++;
             isDown = false;
         }
-        else if(Input.GetKeyDown(KeyCode.Return))
+
+        if (cursorIndex < 0) cursorIndex = 0;
+        if (cursorIndex >= cursorMax) cursorIndex = menuArray.Length - 1;
+        if (cursorIndex != oldCursor) UpdateMenu();
+    }
+    
+    void charactorCursor(int len_of_row)
+    {
+        int oldCursor = cursorIndex;
+        int cursorMax = menuArray.Length;
+        if (isUp)
         {
-            menuArray[cursorIndex].Select();
+            cursorIndex -= len_of_row;
+            isUp = false;
+        }
+        else if (isDown)
+        {
+            cursorIndex += len_of_row;
+            isDown = false;
+        }
+        else if (isLeft)
+        {
+            cursorIndex--;
+            isLeft = false;
+        }
+        else if(isRight)
+        {
+            cursorIndex++;
+            isRight = false;
         }
 
-
-        if(cursorIndex < 0)cursorIndex = menuArray.Length-1;
+        if (cursorIndex < 0) cursorIndex = menuArray.Length - 1;
         if (cursorIndex >= cursorMax) cursorIndex = 0;
         if (cursorIndex != oldCursor) UpdateMenu();
     }
