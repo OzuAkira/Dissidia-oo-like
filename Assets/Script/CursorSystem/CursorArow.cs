@@ -28,7 +28,7 @@ public class CursorArow : MonoBehaviour
         else if (axis.x == 1 && isRight == false) isRight = true;
         else if (axis.x == -1 && isLeft == false) isLeft = true;
     }
-    static string moveKey = "home";
+    
     [SerializeField] int cl_rowLentgh;//【重要な変数】キャラクターリストのIconが改行する場所を指定している //1_origin で指定すること
     void switchingMethod(string key)//Keyに上記のmoveKeyを参照することで、動的にCursorの動きそのものを変えることが可能
     {
@@ -44,7 +44,7 @@ public class CursorArow : MonoBehaviour
     }
     void Update()
     {
-        switchingMethod(moveKey);
+        switchingMethod(CursorMaster.moveKey);
     }
     void OnFire()
     {
