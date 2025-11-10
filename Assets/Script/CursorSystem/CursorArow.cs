@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,16 +7,18 @@ using UnityEngine.InputSystem;
 
 public class CursorArow : MonoBehaviour
 {
-    [SerializeField] GameObject startCursor;
+    [SerializeField] GameObject startCursor,gameMaster;
     static public GameObject cursorObject;
     public int cursorIndex = 0;
-    static public MenuAbstract[] menuArray;//後で消す
     bool isUp = false , isDown = false , isLeft = false , isRight = false;
     RectTransform cursorRect;
+    CursorMaster cursorMaster;
     void Start()
     {
         cursorObject = startCursor;
-        menuArray = MenuDataList.menuStrage["mission1/home"];
+        gameMaster = GameObject.Find("GameMaster");
+        cursorMaster = gameMaster.GetComponent<CursorMaster>();
+        cursorMaster.menuArray = MenuDataList.menuStrage["mission1/home"];
         cursorRect = cursorObject.GetComponent<RectTransform>();
         UpdateMenu();
     }
@@ -28,10 +31,11 @@ public class CursorArow : MonoBehaviour
         else if (axis.x == 1 && isRight == false) isRight = true;
         else if (axis.x == -1 && isLeft == false) isLeft = true;
     }
-    
+
     [SerializeField] int cl_rowLentgh;//【重要な変数】キャラクターリストのIconが改行する場所を指定している //1_origin で指定すること
     void switchingMethod(string key)//Keyに上記のmoveKeyを参照することで、動的にCursorの動きそのものを変えることが可能
     {
+        
         switch (key)
         {
             case "home":
@@ -39,6 +43,8 @@ public class CursorArow : MonoBehaviour
                 break;
             case "charactorList":
                 charactorCursor(cl_rowLentgh);
+                break;
+            case "":
                 break;
         }
     }
@@ -48,12 +54,17 @@ public class CursorArow : MonoBehaviour
     }
     void OnFire()
     {
-       menuArray[cursorIndex].Select();
+        cursorMaster.menuArray[cursorIndex].Select();
+    }
+    public void UpdateCursor()
+    {
+        cursorRect = cursorObject.GetComponent<RectTransform>();
+        UpdateMenu();
     }
     public void UpdateMenu()
     {
         int i = 0;
-        foreach (MenuAbstract menuTable in menuArray)
+        foreach (MenuAbstract menuTable in cursorMaster.menuArray)
         {
             if (cursorIndex == i)
             {
@@ -69,7 +80,7 @@ public class CursorArow : MonoBehaviour
     void homeCursor()
     {
         int oldCursor = cursorIndex;
-        int cursorMax = menuArray.Length;
+        int cursorMax = cursorMaster.menuArray.Length;
         if (isUp)
         {
             cursorIndex--;
@@ -82,14 +93,14 @@ public class CursorArow : MonoBehaviour
         }
 
         if (cursorIndex < 0) cursorIndex = 0;
-        if (cursorIndex >= cursorMax) cursorIndex = menuArray.Length - 1;
+        if (cursorIndex >= cursorMax) cursorIndex = cursorMaster.menuArray.Length - 1;
         if (cursorIndex != oldCursor) UpdateMenu();
     }
     
     void charactorCursor(int len_of_row)
     {
         int oldCursor = cursorIndex;
-        int cursorMax = menuArray.Length;
+        int cursorMax = cursorMaster.menuArray.Length;
         if (isUp)
         {
             cursorIndex -= len_of_row;
@@ -111,7 +122,7 @@ public class CursorArow : MonoBehaviour
             isRight = false;
         }
 
-        if (cursorIndex < 0) cursorIndex = menuArray.Length - 1;
+        if (cursorIndex < 0) cursorIndex = cursorMaster.menuArray.Length - 1;
         if (cursorIndex >= cursorMax) cursorIndex = 0;
         if (cursorIndex != oldCursor) UpdateMenu();
     }

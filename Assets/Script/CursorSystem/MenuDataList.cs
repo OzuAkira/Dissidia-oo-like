@@ -9,7 +9,7 @@ public class MenuDataList : MonoBehaviour
     {
         string sceneName = gameObject.scene.name;
         addMenu(sceneName+"/home", menuDataBase.menuRows[0]);//Mission開始ボタンやキャラクター選択をするメニュー
-        //addMenu("charactorList",menuDataBase.menuRows[1]);//その枠に入れるキャラクターを選択するメニュー
+        addMenu("charactorList",menuDataBase.menuRows[1]);//その枠に入れるキャラクターを選択するメニュー
     }
     
     static public Dictionary<string, MenuAbstract[]> menuStrage = new Dictionary<string, MenuAbstract[]>();
