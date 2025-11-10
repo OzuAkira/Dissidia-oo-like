@@ -12,8 +12,8 @@ public class MenuDataList : MonoBehaviour
         addMenu("charactorList",menuDataBase.menuRows[1]);//その枠に入れるキャラクターを選択するメニュー
     }
     
-    static public Dictionary<string, MenuAbstract[]> menuStrage = new Dictionary<string, MenuAbstract[]>();
-    static public void addMenu(string keyName, MenuRow menu)
+    public Dictionary<string, MenuAbstract[]> menuStrage = new Dictionary<string, MenuAbstract[]>();
+    public void addMenu(string keyName, MenuRow menu)
     {
         menuStrage.Add(keyName, menu.items);
         Debug.Log("【メニューログ】menuStrageに「" + keyName + "」を追加しました");

@@ -5,18 +5,15 @@ using UnityEngine.UI;
 
 public class CursorMaster : MonoBehaviour
 {
-    static public string moveKey = "home";//cursorを動かすための指標 //homeは初期値
+    public string moveKey;//cursorを動かすための指標
     public MenuAbstract[] menuArray;
-    [SerializeField] GameObject[] s_home, s_cl;
-
+    [SerializeField] private GameObject[] homeObj;//定数
+    [SerializeField] private GameObject[] charactorListObj;//定数
     void Start()
     {
-        homeObj = s_home;
-        charactorListObj = s_cl;
+        changeKey("home");
     }
-    static private GameObject[] homeObj;//定数
-    static private GameObject[] charactorListObj;//定数
-    static public void changeKey(string newKey)
+    public void changeKey(string newKey)
     {
         Debug.Log($"【キーログ】moveKyeが「{moveKey}」から「{newKey}」に変更されました");
         moveKey = newKey;

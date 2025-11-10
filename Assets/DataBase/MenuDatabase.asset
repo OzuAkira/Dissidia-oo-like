@@ -13,14 +13,7 @@ MonoBehaviour:
   m_Name: MenuDatabase
   m_EditorClassIdentifier: Assembly-CSharp::MenuDataBase
   menuRows:
-  - items:
-    - {fileID: 7309110147251898810, guid: b8313dd3da6de604ab971dd395ce667c, type: 3}
-    - {fileID: 8876969870799805952, guid: 1353e5cb81c9c2842853b28aac0d6fb5, type: 3}
-    - {fileID: 449983582689443068, guid: 0764a8248a8c1af4bb2a3e9392702dbf, type: 3}
-    - {fileID: 4861683103404756336, guid: 9183ed68d3a7e1a4dacd501bd41c8691, type: 3}
-    - {fileID: 7403142142627750050, guid: 0d64365219ef00e40ba70eafc30dbbc5, type: 3}
-    - {fileID: 6909156869052172272, guid: 4fecb2abeee9c514b99ebfad0bc4dfc8, type: 3}
-    - {fileID: 5462025084388893072, guid: 02bfe039d7a24014581aa9a10b6239cc, type: 3}
+  - items: []
   - items:
     - {fileID: 1523179223564142526, guid: 066c01afee7638241bfaf6b952a54548, type: 3}
     - {fileID: 2591556619382709923, guid: 66e0d8dae59bdc744a010926433059c5, type: 3}

@@ -7,18 +7,21 @@ using UnityEngine.InputSystem;
 
 public class CursorArow : MonoBehaviour
 {
-    [SerializeField] GameObject startCursor,gameMaster;
-    static public GameObject cursorObject;
+    
+    public GameObject cursorObject;
     public int cursorIndex = 0;
-    bool isUp = false , isDown = false , isLeft = false , isRight = false;
+    bool isUp = false, isDown = false, isLeft = false, isRight = false;
+    GameObject startCursor;
     RectTransform cursorRect;
     CursorMaster cursorMaster;
+    MenuDataList menuDataList;
     void Start()
     {
-        cursorObject = startCursor;
-        gameMaster = GameObject.Find("GameMaster");
-        cursorMaster = gameMaster.GetComponent<CursorMaster>();
-        cursorMaster.menuArray = MenuDataList.menuStrage["mission1/home"];
+        startCursor = cursorObject;
+        cursorMaster = GetComponent<CursorMaster>();
+        menuDataList = GetComponent<MenuDataList>();
+
+        cursorMaster.menuArray = menuDataList.menuStrage["mission1/home"];
         cursorRect = cursorObject.GetComponent<RectTransform>();
         UpdateMenu();
     }
@@ -50,7 +53,7 @@ public class CursorArow : MonoBehaviour
     }
     void Update()
     {
-        switchingMethod(CursorMaster.moveKey);
+        switchingMethod(cursorMaster.moveKey);
     }
     void OnFire()
     {
@@ -58,6 +61,7 @@ public class CursorArow : MonoBehaviour
     }
     public void UpdateCursor()
     {
+        Debug.Log(cursorObject.name);
         cursorRect = cursorObject.GetComponent<RectTransform>();
         UpdateMenu();
     }
