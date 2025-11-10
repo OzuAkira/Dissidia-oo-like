@@ -47,7 +47,8 @@ public class CursorArow : MonoBehaviour
             case "charactorList":
                 charactorCursor(cl_rowLentgh);
                 break;
-            case "":
+            default:
+                Debug.Log("");
                 break;
         }
     }
@@ -59,17 +60,23 @@ public class CursorArow : MonoBehaviour
     {
         cursorMaster.menuArray[cursorIndex].Select();
     }
-    public void UpdateCursor()
+    public void UpdateCursor(GameObject newCursorObj)
     {
-        Debug.Log(cursorObject.name);
+        cursorObject = newCursorObj;
+        cursorObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);//Debug用
         cursorRect = cursorObject.GetComponent<RectTransform>();
         UpdateMenu();
     }
     public void UpdateMenu()
     {
         int i = 0;
+        cursorMaster = GetComponent<CursorMaster>();
+
+        Debug.Log($"rectTransform = (x = {cursorRect.anchoredPosition.x} , y = {cursorRect.anchoredPosition.y})");
+        
         foreach (MenuAbstract menuTable in cursorMaster.menuArray)
         {
+            
             if (cursorIndex == i)
             {
                 menuTable.OnImage();
@@ -128,7 +135,11 @@ public class CursorArow : MonoBehaviour
 
         if (cursorIndex < 0) cursorIndex = cursorMaster.menuArray.Length - 1;
         if (cursorIndex >= cursorMax) cursorIndex = 0;
-        if (cursorIndex != oldCursor) UpdateMenu();
+        if (cursorIndex != oldCursor)
+        {
+            Debug.Log("charactorCursorのupdate");
+            UpdateMenu();
+        }
     }
 
 

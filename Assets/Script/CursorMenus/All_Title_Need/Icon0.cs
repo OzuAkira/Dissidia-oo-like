@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Icon0 : MenuAbstract
 {
-    [SerializeField] GameObject nextCursol, gameMaster;
+    GameObject nextCursor;
+    private GameObject gameMaster;
     public string selectedCharactorName = "";
 
     CursorMaster cursorMaster;
@@ -12,7 +13,7 @@ public class Icon0 : MenuAbstract
     MenuDataList menuDataList;
     void Start()
     {
-
+        nextCursor = GameObject.Find("Canvas15").transform.GetChild(0).gameObject;
     }
     public override void Select()
     {
@@ -21,11 +22,12 @@ public class Icon0 : MenuAbstract
         cursorArow = gameMaster.GetComponent<CursorArow>();
         menuDataList = gameMaster.GetComponent<MenuDataList>();
 
-        Debug.Log(nextCursol == null);
-        cursorArow.cursorObject = nextCursol;
+        cursorArow.cursorObject = nextCursor;
+        
+        nextCursor.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);//Debug用
         cursorMaster.changeKey("charactorList");
         
         cursorMaster.menuArray = menuDataList.menuStrage["charactorList"];
-        cursorArow.UpdateCursor();
+        cursorArow.UpdateCursor(nextCursor);
     }
 }
