@@ -44,6 +44,9 @@ public class CursorMaster : MonoBehaviour
                     color = new Color(0.2f, 0.2f, 0.2f);//homeを構成するObjの色を若干、黒にする
                     image.color = color;
                 }
+
+                cursorArow.menuArray = new List<MenuAbstract>();
+
                 foreach (GameObject obj in menuDataList.menuStrage["charactorList"])
                 {
                     obj.SetActive(true);

@@ -7,7 +7,7 @@ public class charactorIcon : MenuAbstract
     [SerializeField] string myName;
     void Start()
     {
-        gameObject.SetActive(false);
+        
     }
     public override void Select()
     {

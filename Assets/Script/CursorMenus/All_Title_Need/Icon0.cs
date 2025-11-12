@@ -20,7 +20,8 @@ public class Icon0 : MenuAbstract
     }
     public override void Select()
     {
-        cursorMaster.changeKey("charactorList");
         cursorArow.UpdateCursor(nextCursor);
+        cursorMaster.changeKey("charactorList");
+        
     }
 }

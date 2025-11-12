@@ -68,14 +68,11 @@ public class CursorArow : MonoBehaviour
         cursorObject = newCursorObj;
         cursorObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);//Debug用
         cursorRect = cursorObject.GetComponent<RectTransform>();
-        UpdateMenu();
     }
     public void UpdateMenu()
     {
         int i = 0;
         cursorMaster = GetComponent<CursorMaster>();
-
-        Debug.Log($"rectTransform = (x = {cursorRect.anchoredPosition.x} , y = {cursorRect.anchoredPosition.y})");
         
         foreach (MenuAbstract menuTable in menuArray)
         {
