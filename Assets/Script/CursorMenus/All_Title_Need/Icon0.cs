@@ -13,21 +13,14 @@ public class Icon0 : MenuAbstract
     MenuDataList menuDataList;
     void Start()
     {
-        nextCursor = GameObject.Find("Canvas15").transform.GetChild(0).gameObject;
+        nextCursor = GameObject.Find("Canvas15").transform.GetChild(0).gameObject;//これが取れてない
+        gameMaster = GameObject.Find("GameMaster");
+        cursorArow = gameMaster.GetComponent<CursorArow>();
+        cursorMaster = gameMaster.GetComponent<CursorMaster>();
     }
     public override void Select()
     {
-        gameMaster = GameObject.Find("GameMaster");
-        cursorMaster = gameMaster.GetComponent<CursorMaster>();
-        cursorArow = gameMaster.GetComponent<CursorArow>();
-        menuDataList = gameMaster.GetComponent<MenuDataList>();
-
-        cursorArow.cursorObject = nextCursor;
-        
-        nextCursor.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);//Debug用
         cursorMaster.changeKey("charactorList");
-        
-        cursorMaster.menuArray = menuDataList.menuStrage["charactorList"];
         cursorArow.UpdateCursor(nextCursor);
     }
 }

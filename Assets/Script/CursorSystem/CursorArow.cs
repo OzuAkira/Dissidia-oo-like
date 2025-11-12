@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 using UnityEngine.InputSystem;
@@ -15,13 +16,15 @@ public class CursorArow : MonoBehaviour
     RectTransform cursorRect;
     CursorMaster cursorMaster;
     MenuDataList menuDataList;
+
+
+    public List<MenuAbstract> menuArray = new List<MenuAbstract>();
     void Start()
     {
         startCursor = cursorObject;
         cursorMaster = GetComponent<CursorMaster>();
         menuDataList = GetComponent<MenuDataList>();
 
-        cursorMaster.menuArray = menuDataList.menuStrage["mission1/home"];
         cursorRect = cursorObject.GetComponent<RectTransform>();
         UpdateMenu();
     }
@@ -58,7 +61,7 @@ public class CursorArow : MonoBehaviour
     }
     void OnFire()
     {
-        cursorMaster.menuArray[cursorIndex].Select();
+        menuArray[cursorIndex].Select();
     }
     public void UpdateCursor(GameObject newCursorObj)
     {
@@ -74,7 +77,7 @@ public class CursorArow : MonoBehaviour
 
         Debug.Log($"rectTransform = (x = {cursorRect.anchoredPosition.x} , y = {cursorRect.anchoredPosition.y})");
         
-        foreach (MenuAbstract menuTable in cursorMaster.menuArray)
+        foreach (MenuAbstract menuTable in menuArray)
         {
             
             if (cursorIndex == i)
@@ -91,7 +94,7 @@ public class CursorArow : MonoBehaviour
     void homeCursor()
     {
         int oldCursor = cursorIndex;
-        int cursorMax = cursorMaster.menuArray.Length;
+        int cursorMax = menuArray.Count();
         if (isUp)
         {
             cursorIndex--;
@@ -104,14 +107,14 @@ public class CursorArow : MonoBehaviour
         }
 
         if (cursorIndex < 0) cursorIndex = 0;
-        if (cursorIndex >= cursorMax) cursorIndex = cursorMaster.menuArray.Length - 1;
+        if (cursorIndex >= cursorMax) cursorIndex = menuArray.Count() - 1;
         if (cursorIndex != oldCursor) UpdateMenu();
     }
     
     void charactorCursor(int len_of_row)
     {
         int oldCursor = cursorIndex;
-        int cursorMax = cursorMaster.menuArray.Length;
+        int cursorMax = menuArray.Count();
         if (isUp)
         {
             cursorIndex -= len_of_row;
@@ -133,7 +136,7 @@ public class CursorArow : MonoBehaviour
             isRight = false;
         }
 
-        if (cursorIndex < 0) cursorIndex = cursorMaster.menuArray.Length - 1;
+        if (cursorIndex < 0) cursorIndex = menuArray.Count() - 1;
         if (cursorIndex >= cursorMax) cursorIndex = 0;
         if (cursorIndex != oldCursor)
         {

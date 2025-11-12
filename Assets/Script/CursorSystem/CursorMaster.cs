@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class CursorMaster : MonoBehaviour
 {
     public string moveKey;//cursorを動かすための指標
-    public MenuAbstract[] menuArray;
-    [SerializeField] private GameObject[] homeObj;//定数
-    [SerializeField] private GameObject[] charactorListObj;//定数
+    MenuDataList menuDataList;
+    CursorArow cursorArow;
     void Start()
     {
+        menuDataList = GetComponent<MenuDataList>();
+        cursorArow = GetComponent<CursorArow>();
         changeKey("home");
     }
     public void changeKey(string newKey)
@@ -21,18 +22,20 @@ public class CursorMaster : MonoBehaviour
         switch (newKey)
         {
             case "home":
-                foreach (GameObject obj in homeObj)
+
+                foreach (GameObject obj in menuDataList.menuStrage["mission1/home"])
                 {
                     obj.SetActive(true);
+                    cursorArow.menuArray.Add(obj.GetComponent<MenuAbstract>());
                 }
-                foreach(GameObject obj in charactorListObj)
+                foreach (GameObject obj in menuDataList.menuStrage["charactorList"])
                 {
                     obj.SetActive(false);
                 }
                 break;
             case "charactorList":
                 Image image;
-                foreach (GameObject obj in homeObj)
+                foreach (GameObject obj in menuDataList.menuStrage["mission1/home"])
                 {
                     obj.SetActive(true);
 
@@ -41,9 +44,10 @@ public class CursorMaster : MonoBehaviour
                     color = new Color(0.2f, 0.2f, 0.2f);//homeを構成するObjの色を若干、黒にする
                     image.color = color;
                 }
-                foreach(GameObject obj in charactorListObj)
+                foreach (GameObject obj in menuDataList.menuStrage["charactorList"])
                 {
                     obj.SetActive(true);
+                    cursorArow.menuArray.Add(obj.GetComponent<MenuAbstract>());
                 }
                 break;
 
@@ -51,5 +55,6 @@ public class CursorMaster : MonoBehaviour
                 Debug.Log("【キーログ】変更したキーは、CursorMasterに登録されていません");
                 break;
         }
+        cursorArow.UpdateMenu();
     }
 }
