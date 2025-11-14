@@ -5,17 +5,21 @@ using UnityEngine;
 public class MenuDataList : MonoBehaviour
 {
     public MenuDataBase menuDataBase;
+
+        [SerializeField] private GameObject[] homeObj;//
+        [SerializeField] private GameObject[] charactorListObj;//
+
     void Awake()
     {
         string sceneName = gameObject.scene.name;
-        addMenu(sceneName+"/home", menuDataBase.menuRows[0]);//Mission開始ボタンやキャラクター選択をするメニュー
-        //addMenu("charactorList",menuDataBase.menuRows[1]);//その枠に入れるキャラクターを選択するメニュー
+        addMenu(sceneName+"/home", homeObj);//Mission開始ボタンやキャラクター選択をするメニュー
+        addMenu("charactorList",charactorListObj);//その枠に入れるキャラクターを選択するメニュー
     }
     
-    static public Dictionary<string, MenuAbstract[]> menuStrage = new Dictionary<string, MenuAbstract[]>();
-    static public void addMenu(string keyName, MenuRow menu)
+    public Dictionary<string, GameObject[]> menuStrage = new Dictionary<string, GameObject[]>();
+    public void addMenu(string keyName, GameObject[] menu)
     {
-        menuStrage.Add(keyName, menu.items);
+        menuStrage.Add(keyName, menu);
         Debug.Log("【メニューログ】menuStrageに「" + keyName + "」を追加しました");
     }
 }
