@@ -124,22 +124,18 @@ public class CursorArow : MonoBehaviour
         }
         else if (isLeft)
         {
-            cursorIndex--;
+            if ((cursorIndex+1) % (len_of_row + 1) != 0)cursorIndex--;//cursorIndex が len_of_row+1の倍数「ではない」とき
             isLeft = false;
         }
         else if(isRight)
         {
-            cursorIndex++;
+            if ((cursorIndex+1) % len_of_row != 0)cursorIndex++;
             isRight = false;
         }
 
-        if (cursorIndex < 0) cursorIndex = menuArray.Count() - 1;
-        if (cursorIndex >= cursorMax) cursorIndex = 0;
-        if (cursorIndex != oldCursor)
-        {
-            Debug.Log("charactorCursorのupdate");
-            UpdateMenu();
-        }
+        if (cursorIndex < 0) cursorIndex = 0;
+        if (cursorIndex >= cursorMax) cursorIndex = menuArray.Count() - 1;
+        if (cursorIndex != oldCursor)UpdateMenu();
     }
 
 
