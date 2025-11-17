@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MenuDataList : MonoBehaviour
 {
-    public MenuDataBase menuDataBase;
-
         [SerializeField] private GameObject[] homeObj;//
         [SerializeField] private GameObject[] charactorListObj;//
 
