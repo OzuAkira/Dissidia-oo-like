@@ -19,7 +19,7 @@ public class charactorIcon : MenuAbstract
     }
     public override void Select()
     {
-        gm.GetComponent<MemberSetting>().setCractor(myName);
+        gm.GetComponent<MemberSetting>().setCharactor(myName);
 
         cursorArow.cursorObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(900,0);
         cursorArow.UpdateCursor(nextCursor);//cursorの変更
