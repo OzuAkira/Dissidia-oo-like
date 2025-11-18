@@ -7,15 +7,17 @@ public class MemberSetting : MonoBehaviour
 {
     public GameObject iconObj;
 
-    public string[] nameArray;
+    public string[] nameArray = new string[]{"","",""};
 
     private int memberIndex;
-    public void setIndex(int nowIndex)//Iconから呼び出される想定
+    public void setIndex(int nowIndex , GameObject nowIconObj)//Iconから呼び出される想定
     {
         memberIndex = nowIndex;
+        iconObj = nowIconObj;
     }
     public void setCractor(string selectName)//charactorIconから呼び出される想定
     {
         nameArray[memberIndex] = selectName;
+        iconObj.GetComponent<Icon>().selectedCharactorName = selectName;
     }
 }

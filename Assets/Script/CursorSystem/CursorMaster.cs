@@ -18,14 +18,18 @@ public class CursorMaster : MonoBehaviour
     {
         Debug.Log($"【キーログ】moveKyeが「{moveKey}」から「{newKey}」に変更されました");
         moveKey = newKey;
-
+        Image image;
         switch (newKey)
         {
             case "home":
-
+                cursorArow.menuArray = new List<MenuAbstract>();//ここでMenuをリセット
                 foreach (GameObject obj in menuDataList.menuStrage["mission1/home"])
                 {
                     obj.SetActive(true);
+                    image = obj.GetComponent<Image>();
+                    Color color = image.color;
+                    color = new Color(1,1,1);//homeを構成するObjの色を白にする
+                    image.color = color;
                     cursorArow.menuArray.Add(obj.GetComponent<MenuAbstract>());
                 }
                 foreach (GameObject obj in menuDataList.menuStrage["charactorList"])
@@ -34,7 +38,7 @@ public class CursorMaster : MonoBehaviour
                 }
                 break;
             case "charactorList":
-                Image image;
+                
                 foreach (GameObject obj in menuDataList.menuStrage["mission1/home"])
                 {
                     obj.SetActive(true);
@@ -45,7 +49,7 @@ public class CursorMaster : MonoBehaviour
                     image.color = color;
                 }
 
-                cursorArow.menuArray = new List<MenuAbstract>();
+                cursorArow.menuArray = new List<MenuAbstract>();//ここでMenuをリセット
 
                 foreach (GameObject obj in menuDataList.menuStrage["charactorList"])
                 {

@@ -102,6 +102,16 @@ public class CursorArow : MonoBehaviour
             cursorIndex++;
             isDown = false;
         }
+        else if (isLeft)
+        {
+            cursorIndex--;
+            isLeft = false;
+        }
+        else if (isRight)
+        {
+            cursorIndex++;
+            isRight = false;
+        }
 
         if (cursorIndex < 0) cursorIndex = 0;
         if (cursorIndex >= cursorMax) cursorIndex = menuArray.Count() - 1;
