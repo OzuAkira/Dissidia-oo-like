@@ -101,6 +101,39 @@ class MenuDataList{
     + void addMenu()
 }
 class MenuAbstract{
-
+    - Image image
+    + Sprit onImage
+    + Sprit offImage
+    - void Start()
+    + void OnImage()
+    + void OffImage()
+    # void Select()
+}
+class CursorMater{
+    - MenuDataList menuDataList
+    - CursorArow cursorArow
+    + string moveKey
+    - void Start()
+    + void changeKey()
+}
+class CursorArow{
+    - bool isUp
+    - bool isDown
+    - bool isLeft
+    - bool isRight
+    - GameObject startCursor
+    - RectTransform cursorRect
+    - CursorMaster cursorMaster
+    + GameObject cursorObject
+    + List<MenuAbstract> menuArray
+    - void Start()
+    - void switchingMethod()
+    - void Updat()
+    - void OnFire()
+    - void homeCursor()
+    - void charactorCursor()
+    + void OnMove()
+    + void UpdateCursor()
+    + void UpdateMenu()
 }
 ```
