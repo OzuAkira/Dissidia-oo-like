@@ -9,6 +9,7 @@ public class charactorIcon : MenuAbstract
     CursorMaster cursorMaster;
     public GameObject nextCursor;
     CursorArow cursorArow;
+    MenuDataList menuDataList;
     void Start()
     {
         gm = GameObject.Find("GameMaster");
@@ -16,6 +17,7 @@ public class charactorIcon : MenuAbstract
 
         cursorMaster = gm.GetComponent<CursorMaster>();
         cursorArow = gm.GetComponent<CursorArow>();
+        menuDataList = gm.GetComponent<MenuDataList>();
     }
     public override void Select()
     {
@@ -23,6 +25,9 @@ public class charactorIcon : MenuAbstract
 
         cursorArow.cursorObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(900,0);
         cursorArow.UpdateCursor(nextCursor);//cursorの変更
+
+        //ここのSelect()がトリガーとなってエスケープ処理を起動する
+        GameObject[] cloneArray = menuDataList.menuStrage["charactorList"];
 
         cursorMaster.changeKey("home");
 

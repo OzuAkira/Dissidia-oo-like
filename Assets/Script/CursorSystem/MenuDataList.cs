@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MenuDataList : MonoBehaviour
 {
-        [SerializeField] private GameObject[] homeObj;//
-        [SerializeField] private GameObject[] charactorListObj;//
+    [SerializeField] GameObject escapeObj ;//選択したキャラクターの場所に置くObj
+    [SerializeField] private GameObject[] homeObj;//
+    [SerializeField] private GameObject[] charactorListObj;//
 
     void Awake()
     {
