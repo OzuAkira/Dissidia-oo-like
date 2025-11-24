@@ -44,7 +44,10 @@
 ### E_Icon : menuAbstract
 現在、機能は未実装
 
+### CharactorIcon : menuAbstract
+
 # クラス図
+## ノードの意味
 <table>
 <th>可視性</th><th>意味</th><th>効果</th>
 <tr><td>＋</td><td>Public</td><td>パッケージ外からでも使える</td></tr>
@@ -54,13 +57,66 @@
 <tr><td>＃</td><td>Protected</td><td>親子関係同士のクラス両方</td></tr>
 
 <tr><td>~</td><td>Package</td><td>パッケージ内ならどこでも使える</td></tr>
-
-
 </table>
+
+## 矢印の意味
+
+|関係の種類|Mermaid|説明|
+|--|--|--|
+継承（Inheritanc）|	--> |あるクラス（子クラス）が別のクラス（親クラス）の属性や<br>操作（メソッド）を受け継ぐ関係|
+実現（Realization）|..\|>	|クラスがインターフェースや抽象クラスで定義された操作を実装する関係<br>select()を実行したときに変化を及ぼすクラス|
+合成（Composition）|--*	|全体-部分の強い結合。全体削除時、部分も削除される|
+集約（Aggregation）|--o	|全体-部分の関係。部分は独立して存在可能。|
+関連（Association）|-->	|クラス間の関連を表す。方向付き。|
+リンク (Link)|--|単純な関連。実線で表現。|
+依存（Dependency）|	..>	|クラスが別のクラスを使用する。疎結合。|
+
+
+
+
 
 ```mermaid
 classDiagram
-class characterIcon{
+
+class MenuAbstract{
+    - Image image
+    + Sprit onImage
+    + Sprit offImage
+    - void Start()
+    + void OnImage()
+    + void OffImage()
+    # void Select()
+}
+class CursorArow{
+    - bool isUp
+    - bool isDown
+    - bool isLeft
+    - bool isRight
+    - GameObject startCursor
+    - RectTransform cursorRect
+    - CursorMaster cursorMaster
+    + GameObject cursorObject
+    + int cursorIndex
+    + List &lt MenuAbstract &gt menuArray
+    - void Start()
+    - void switchingMethod()
+    - void Updat()
+    - void OnFire()
+    - void homeCursor()
+    - void charactorCursor()
+    + void OnMove()
+    + void UpdateCursor()
+    + void UpdateMenu()
+}
+class CursorMaster{
+    - MenuDataList menuDataList
+    - CursorArow cursorArow
+    + string moveKey
+    - void Start()
+    + void changeKey()
+}
+
+class CharactorIcon{
     - string myName
     - GameObject gm
     - CursorMater cursorMaster
@@ -96,44 +152,35 @@ class MemberSetting{
 class MenuDataList{
     - GameObject[] homeObj
     - GameObject[] charactorListObj
-    + Dictionary<string,GameObject[]> menuStrage
+    + Dictionary &lt string,GameObject[] &gt menuStrage
     - void Awake()
     + void addMenu()
 }
-class MenuAbstract{
-    - Image image
-    + Sprit onImage
-    + Sprit offImage
-    - void Start()
-    + void OnImage()
-    + void OffImage()
-    # void Select()
-}
-class CursorMater{
-    - MenuDataList menuDataList
-    - CursorArow cursorArow
-    + string moveKey
-    - void Start()
-    + void changeKey()
-}
-class CursorArow{
-    - bool isUp
-    - bool isDown
-    - bool isLeft
-    - bool isRight
-    - GameObject startCursor
-    - RectTransform cursorRect
-    - CursorMaster cursorMaster
-    + GameObject cursorObject
-    + List<MenuAbstract> menuArray
-    - void Start()
-    - void switchingMethod()
-    - void Updat()
-    - void OnFire()
-    - void homeCursor()
-    - void charactorCursor()
-    + void OnMove()
-    + void UpdateCursor()
-    + void UpdateMenu()
-}
+
+
+
+MenuAbstract --> CharactorIcon
+MenuAbstract --> Icon
+MenuAbstract --> Submit
+MenuAbstract --> E_Icon
+
+Icon ..|> CursorMaster :changeKey("charactorList")
+Icon ..|> CursorArow :UpdateCursor(nextCursor)
+Icon ..|> CursorArow :cursorIndex = 0
+Icon ..|> CursorArow :UpdateMenu()
+Icon ..|> MemberSetting :setIndex(myIndex,gameObject)
+
+CursorMaster *-- CursorArow :参照（moveKey)
+
+CharactorIcon ..|> CursorArow :UpdateCursor(nextCursor)
+CharactorIcon ..|> MemberSetting :setCharacter(myName)
+CharactorIcon --o MemberSetting :select()
+MemberSetting --o Icon :CharactorIcon.select()
+Icon --o CharactorIcon :return(myIndex)
+CharactorIcon ..|> CursorArow :cursorIndex = myIndex
+CharactorIcon ..|> CursorMaster :chageKey("home")
+
+CursorMaster -- MenuDataList
+
+CursorArow ..|> MenuAbstract : do-select()
 ```
