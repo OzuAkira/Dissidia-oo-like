@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class charactorIcon : MenuAbstract
 {
@@ -10,6 +12,7 @@ public class charactorIcon : MenuAbstract
     public GameObject nextCursor;
     CursorArow cursorArow;
     MenuDataList menuDataList;
+    public bool isDummy = false;
     void Start()
     {
         gm = GameObject.Find("GameMaster");
@@ -18,21 +21,30 @@ public class charactorIcon : MenuAbstract
         cursorMaster = gm.GetComponent<CursorMaster>();
         cursorArow = gm.GetComponent<CursorArow>();
         menuDataList = gm.GetComponent<MenuDataList>();
+
     }
+    
     public override void Select()
     {
-        gm.GetComponent<MemberSetting>().setCharactor(myName);
+        if (isDummy)
+        {
+            
+        }
+        else
+        {
+            gm.GetComponent<MemberSetting>().setCharactor(myName);
 
-        cursorArow.cursorObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(900,0);
-        cursorArow.UpdateCursor(nextCursor);//cursorの変更
+            cursorArow.cursorObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(900,0);
+            cursorArow.UpdateCursor(nextCursor);//cursorの変更
 
-        //ここのSelect()がトリガーとなってエスケープ処理を起動する
-        GameObject[] cloneArray = menuDataList.menuStrage["charactorList"];
+            //ここのSelect()がトリガーとなってエスケープ処理を起動する
+            isDummy = true;
 
-        cursorMaster.changeKey("home");
+            cursorMaster.changeKey("home");
 
-        //↓”cursorIndexを現在選択しているIconのIndexと同じものにする”↓
-        cursorArow.cursorIndex = gm.GetComponent<MemberSetting>().iconObj.GetComponent<Icon>().myIndex;
-        cursorArow.UpdateMenu();//charactorSelectListを選択し終えて、Homeに戻った際に、選択したIconのIndexから始まるようにする処理
+            //↓”cursorIndexを現在選択しているIconのIndexと同じものにする”↓
+            cursorArow.cursorIndex = gm.GetComponent<MemberSetting>().iconObj.GetComponent<Icon>().myIndex;
+            cursorArow.UpdateMenu();//charactorSelectListを選択し終えて、Homeに戻った際に、選択したIconのIndexから始まるようにする処理
+        }
     }
 }
