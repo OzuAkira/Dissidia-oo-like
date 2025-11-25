@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class charactorIcon : MenuAbstract
 {
-    [SerializeField] string myName;//各々のObjectに名前を付ける
+    public string myName;//各々のObjectに名前を付ける
     GameObject gm;
     CursorMaster cursorMaster;
     public GameObject nextCursor;
     CursorArow cursorArow;
     MenuDataList menuDataList;
-    public bool isDummy = false;
+    public bool isDummy = false;//MenuDataListから操作する（本スクリプトでは書き換えない）
     void Start()
     {
         gm = GameObject.Find("GameMaster");
@@ -23,22 +23,34 @@ public class charactorIcon : MenuAbstract
         menuDataList = gm.GetComponent<MenuDataList>();
 
     }
-    
+    void Update()
+    {
+
+        Image image = GetComponent<Image>();
+        Color c = image.color;
+
+        if (isDummy) c = new Color(0.2f, 0.2f, 0.2f);//選択済みのアイコンを構成するObjの色を若干、黒にする
+        else c = Color.white;
+
+        image.color = c;
+    }
     public override void Select()
     {
+        
         if (isDummy)
         {
-            
+            Debug.Log("【メニューログ】ダミーアイコンを選択しました");
         }
         else
         {
             gm.GetComponent<MemberSetting>().setCharactor(myName);
+            menuDataList.updateCharactorMenu("charactorList");
 
             cursorArow.cursorObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(900,0);
             cursorArow.UpdateCursor(nextCursor);//cursorの変更
 
             //ここのSelect()がトリガーとなってエスケープ処理を起動する
-            isDummy = true;
+            
 
             cursorMaster.changeKey("home");
 

@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -42,8 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -66,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 0
@@ -229,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5729773e2b5a9043acb3d6fda7c6ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  escapeObj: {fileID: 0}
   homeObj:
   - {fileID: 4278488429929624684}
   - {fileID: 3556809417815275572}
@@ -256,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae11c77821a70eb4b8a140399a3dd7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveKey: home
+  moveKey: null
 --- !u!114 &634109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,6 +746,7 @@ MonoBehaviour:
   offImage: {fileID: 0}
   myName: a
   nextCursor: {fileID: 0}
+  isDummy: 0
 --- !u!114 &1082400888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,6 +914,7 @@ MonoBehaviour:
   offImage: {fileID: 0}
   myName: d
   nextCursor: {fileID: 0}
+  isDummy: 0
 --- !u!114 &1146220079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1056,6 +1056,7 @@ MonoBehaviour:
   offImage: {fileID: 0}
   myName: b
   nextCursor: {fileID: 0}
+  isDummy: 0
 --- !u!114 &1303927620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1148,6 +1149,7 @@ MonoBehaviour:
   offImage: {fileID: 0}
   myName: f
   nextCursor: {fileID: 0}
+  isDummy: 0
 --- !u!114 &1334190626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1240,6 +1242,7 @@ MonoBehaviour:
   offImage: {fileID: 0}
   myName: e
   nextCursor: {fileID: 0}
+  isDummy: 0
 --- !u!114 &1523161077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1415,6 +1418,7 @@ MonoBehaviour:
   offImage: {fileID: 0}
   myName: c
   nextCursor: {fileID: 0}
+  isDummy: 0
 --- !u!114 &1852006861
 MonoBehaviour:
   m_ObjectHideFlags: 0

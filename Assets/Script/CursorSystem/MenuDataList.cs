@@ -21,4 +21,28 @@ public class MenuDataList : MonoBehaviour
         menuStrage.Add(keyName, menu);
         Debug.Log("【メニューログ】menuStrageに「" + keyName + "」を追加しました");
     }
+    public void updateCharactorMenu(string keyName)
+    {
+        MemberSetting memberSetting = GetComponent<MemberSetting>();
+        switch(keyName)
+        {
+            case "charactorList":
+                foreach(GameObject icon in menuStrage["charactorList"])
+                {
+                    charactorIcon charactorIcon = icon.GetComponent<charactorIcon>();
+                    foreach(string name in memberSetting.nameArray)
+                    {
+                        if(name == charactorIcon.myName)
+                        {
+                            charactorIcon.isDummy = true;
+                            
+                            break;
+                        }
+                        else charactorIcon.isDummy = false;
+                    }
+                    
+                }
+                break;
+        }
+    }
 }
