@@ -15,7 +15,7 @@ public class MemberSetting : MonoBehaviour
         memberIndex = nowIndex;
         iconObj = nowIconObj;
     }
-    public void setCractor(string selectName)//charactorIconから呼び出される想定
+    public void setCharactor(string selectName)//charactorIconから呼び出される想定
     {
         nameArray[memberIndex] = selectName;
         iconObj.GetComponent<Icon>().selectedCharactorName = selectName;

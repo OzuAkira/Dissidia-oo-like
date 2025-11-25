@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MenuDataList : MonoBehaviour
 {
-        [SerializeField] private GameObject[] homeObj;//
-        [SerializeField] private GameObject[] charactorListObj;//
+    [SerializeField] GameObject escapeObj ;//選択したキャラクターの場所に置くObj
+    [SerializeField] private GameObject[] homeObj;//
+    [SerializeField] private GameObject[] charactorListObj;//
 
     void Awake()
     {
@@ -19,5 +20,29 @@ public class MenuDataList : MonoBehaviour
     {
         menuStrage.Add(keyName, menu);
         Debug.Log("【メニューログ】menuStrageに「" + keyName + "」を追加しました");
+    }
+    public void updateCharactorMenu(string keyName)
+    {
+        MemberSetting memberSetting = GetComponent<MemberSetting>();
+        switch(keyName)
+        {
+            case "charactorList":
+                foreach(GameObject icon in menuStrage["charactorList"])
+                {
+                    charactorIcon charactorIcon = icon.GetComponent<charactorIcon>();
+                    foreach(string name in memberSetting.nameArray)
+                    {
+                        if(name == charactorIcon.myName)
+                        {
+                            charactorIcon.isDummy = true;
+                            
+                            break;
+                        }
+                        else charactorIcon.isDummy = false;
+                    }
+                    
+                }
+                break;
+        }
     }
 }

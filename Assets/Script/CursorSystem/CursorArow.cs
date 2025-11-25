@@ -15,7 +15,7 @@ public class CursorArow : MonoBehaviour
     GameObject startCursor;
     RectTransform cursorRect;
     CursorMaster cursorMaster;
-    MenuDataList menuDataList;
+    //MenuDataList menuDataList;
 
 
     public List<MenuAbstract> menuArray = new List<MenuAbstract>();
@@ -23,7 +23,7 @@ public class CursorArow : MonoBehaviour
     {
         startCursor = cursorObject;
         cursorMaster = GetComponent<CursorMaster>();
-        menuDataList = GetComponent<MenuDataList>();
+        //menuDataList = GetComponent<MenuDataList>();
 
         cursorRect = cursorObject.GetComponent<RectTransform>();
         UpdateMenu();
@@ -66,7 +66,7 @@ public class CursorArow : MonoBehaviour
     public void UpdateCursor(GameObject newCursorObj)
     {
         cursorObject = newCursorObj;
-        cursorObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);//Debug用
+        
         cursorRect = cursorObject.GetComponent<RectTransform>();
     }
     public void UpdateMenu()
