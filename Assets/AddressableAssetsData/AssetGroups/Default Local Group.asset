@@ -13,23 +13,11 @@ MonoBehaviour:
   m_Name: Default Local Group
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
-  m_Data:
-    m_SerializedData: []
   m_GUID: 04328a016f458194c8bce6dfed43affe
-  m_SerializeEntries:
-  - m_GUID: 387a6689843a1e141a4da15f1b5e5e55
-    m_Address: svsets/PlayerParameters.csv
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 988bdd93504aedf499cfc70edeb6f827
-    m_Address: Assets/EnemyParameter.csv
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 91c4fd6fdfff19945b4dfbb42ca978fc, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 0acf6b41ed9d0fd4db2bddb8aada9e89, type: 2}
     - {fileID: 11400000, guid: c37db63f8a3f29e488cdd7d1cc4c514b, type: 2}
+    - {fileID: 11400000, guid: 0acf6b41ed9d0fd4db2bddb8aada9e89, type: 2}

@@ -1,19 +1,19 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class EnemySetting : MonoBehaviour
 {
-    [SerializeField] string[] keies;
+    MenuDataList menuDataList;
     [SerializeField] GameObject[] windowObj;
-
-    public Dictionary<string,GameObject[]> enemyWindow;
 
     void Start()
     {
-        for(int i = 0; i < keies.Length; i++)
+        menuDataList = GetComponent<MenuDataList>();
+        for(int i = 0; i < windowObj.Length; i++)
         {
-            GameObject[] oneListObj = {gameObject};
-            enemyWindow.Add(keies[i],oneListObj);
+            GameObject[] oneListObj = {windowObj[i]};
+            menuDataList.addMenu($"enemyIcon{i}",oneListObj);
         }
     }
 }
