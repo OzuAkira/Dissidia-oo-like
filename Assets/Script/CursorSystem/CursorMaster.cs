@@ -8,6 +8,8 @@ public class CursorMaster : MonoBehaviour
     public string moveKey;//cursorを動かすための指標
     MenuDataList menuDataList;
     CursorArow cursorArow;
+
+    public GameObject emptyObj;//MenuAbstractの付与が必須
     void Start()
     {
         menuDataList = GetComponent<MenuDataList>();
@@ -58,6 +60,18 @@ public class CursorMaster : MonoBehaviour
                 }
                 break;
 
+            case "enemyInformation":
+                cursorArow.menuArray = new List<MenuAbstract>();
+                cursorArow.menuArray.Add(emptyObj.GetComponent<MenuAbstract>());
+
+                foreach(GameObject obj in menuDataList.menuStrage["enemyInformation"])
+                {
+                    obj.SetActive(true);
+
+                    
+                }
+                break;
+            
             default:
                 Debug.Log("【キーログ】変更したキーは、CursorMasterに登録されていません");
                 break;

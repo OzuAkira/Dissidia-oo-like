@@ -13,7 +13,7 @@ public class EnemySetting : MonoBehaviour
         for(int i = 0; i < windowObj.Length; i++)
         {
             GameObject[] oneListObj = {windowObj[i]};
-            menuDataList.addMenu($"enemyIcon{i}",oneListObj);
+            menuDataList.addMenu("enemyInformation" , oneListObj);
         }
     }
 }

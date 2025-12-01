@@ -5,6 +5,10 @@ public class enemyInfomation : MonoBehaviour
 {
     [SerializeField] float margin;//正の値で入力
     RectTransform rectTransform;
+    void Awake()
+    {
+        gameObject.SetActive(false);
+    }
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();

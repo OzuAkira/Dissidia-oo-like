@@ -159,6 +159,12 @@ class MemberSetting{
     + void setIndex(int nowIndex,GameObject nowObj)
     + void setCharactor(string selectName)
 }
+class EnemySetting{
+    - MenuDataList menuDataList
+    - GameObject[] windowObj
+    - void Start():addMenu
+    
+}
 class MenuDataList{
     - GameObject[] homeObj
     - GameObject[] charactorListObj
@@ -196,4 +202,6 @@ MenuDataList --|> MemberSetting :nameArrayを取得
 MenuDataList --|> CharactorIcon :isDummyを判定
 
 CursorArow ..|> MenuAbstract : do-select()
+
+EnemySetting ..|> MenuDataList : Start()でaddMenu()をループで数回実行
 ```

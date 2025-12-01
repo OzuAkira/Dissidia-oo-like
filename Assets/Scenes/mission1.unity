@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveKey: null
+  emptyObj: {fileID: 0}
 --- !u!114 &634109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2103,6 +2104,7 @@ MonoBehaviour:
   onImage: {fileID: 0}
   offImage: {fileID: 0}
   enemyName: 
+  emptyObj: {fileID: 0}
 --- !u!224 &5997829247675174075
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2209,7 +2211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onImage: {fileID: 0}
   offImage: {fileID: 0}
-  enemyName: 
+  enemyName: enemyInformation
+  emptyObj: {fileID: 0}
 --- !u!114 &7480578147640357862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2320,6 +2323,7 @@ MonoBehaviour:
   onImage: {fileID: 0}
   offImage: {fileID: 0}
   enemyName: 
+  emptyObj: {fileID: 0}
 --- !u!1 &8396143567140053310
 GameObject:
   m_ObjectHideFlags: 0
