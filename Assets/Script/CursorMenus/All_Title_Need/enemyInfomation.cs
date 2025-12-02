@@ -1,7 +1,7 @@
 using System.Data.SqlTypes;
 using UnityEngine;
 
-public class enemyInfomation : MonoBehaviour
+public class enemyInfomation : MenuAbstract
 {
     [SerializeField] float margin;//正の値で入力
     RectTransform rectTransform;
@@ -14,5 +14,9 @@ public class enemyInfomation : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
 
         rectTransform.anchoredPosition = new Vector2(0,(rectTransform.sizeDelta.y/2 - margin)*-1);//RectTransformのHeightの値÷2をマイナスにしてY座標にする
+    }
+    public override void Select()
+    {
+        Debug.Log("【なにもないよ】");
     }
 }

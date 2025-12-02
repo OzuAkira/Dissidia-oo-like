@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class CursorMaster : MonoBehaviour
 {
     public string moveKey;//cursorを動かすための指標
+
+    [SerializeField] int enemyIndex;//【重要な変数】エネミーアイコンの場所をセットする変数。基本変えない。
     MenuDataList menuDataList;
     CursorArow cursorArow;
-
-    public GameObject emptyObj;//MenuAbstractの付与が必須
     void Start()
     {
         menuDataList = GetComponent<MenuDataList>();
@@ -61,14 +61,24 @@ public class CursorMaster : MonoBehaviour
                 break;
 
             case "enemyInformation":
-                cursorArow.menuArray = new List<MenuAbstract>();
-                cursorArow.menuArray.Add(emptyObj.GetComponent<MenuAbstract>());
 
-                foreach(GameObject obj in menuDataList.menuStrage["enemyInformation"])
+                int enemyNum = cursorArow.cursorIndex - 3;
+                cursorArow.menuArray = new List<MenuAbstract>();
+
+                foreach (GameObject obj in menuDataList.menuStrage["mission1/home"])
                 {
                     obj.SetActive(true);
 
-                    
+                    image = obj.GetComponent<Image>();
+                    Color color = image.color;
+                    color = new Color(0.2f, 0.2f, 0.2f);//homeを構成するObjの色を若干、黒にする
+                    image.color = color;
+                }
+                
+                foreach(GameObject obj in menuDataList.menuStrage[$"enemy_{cursorArow.cursorIndex - enemyIndex}_Info"])
+                {
+                    obj.SetActive(true);
+                    cursorArow.menuArray.Add(obj.GetComponent<MenuAbstract>());
                 }
                 break;
             

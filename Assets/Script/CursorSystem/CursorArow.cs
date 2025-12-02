@@ -39,6 +39,7 @@ public class CursorArow : MonoBehaviour
     }
 
     [SerializeField] int cl_rowLentgh;//【重要な変数】キャラクターリストのIconが改行する場所を指定している //1_origin で指定すること
+   
     void switchingMethod(string key)//Keyに上記のmoveKeyを参照することで、動的にCursorの動きそのものを変えることが可能
     {
         
@@ -50,8 +51,11 @@ public class CursorArow : MonoBehaviour
             case "charactorList":
                 charactorCursor(cl_rowLentgh);
                 break;
+            case "enemyInformation":
+                enemyInfoCursor();
+                break;
             default:
-                Debug.Log("");
+                Debug.Log("【エラー】キーがないよ");
                 break;
         }
     }
@@ -147,7 +151,40 @@ public class CursorArow : MonoBehaviour
         if (cursorIndex >= cursorMax) cursorIndex = menuArray.Count() - 1;
         if (cursorIndex != oldCursor)UpdateMenu();
     }
+    void enemyInfoCursor()//全面的に書き換える必要がある
+    {
+        int oldCursor = cursorIndex;
 
+        var len_of_row = 0;//エラーを消すためだけに入れている変数。
+
+        int cursorMax = menuArray.Count();
+
+        if (isUp)
+        {
+            cursorIndex -= len_of_row;
+            isUp = false;
+        }
+
+        else if (isDown)
+        {
+            cursorIndex += len_of_row;
+            isDown = false;
+        }
+
+        else if (isLeft)
+        {
+            isLeft = false;
+        }
+        
+        else if(isRight)
+        {
+            isRight = false;
+        }
+
+        if (cursorIndex < 0) cursorIndex = 0;
+        if (cursorIndex >= cursorMax) cursorIndex = menuArray.Count() - 1;
+        if (cursorIndex != oldCursor)UpdateMenu();
+    }
 
 
 
