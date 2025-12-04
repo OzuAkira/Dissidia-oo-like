@@ -151,33 +151,47 @@ public class CursorArow : MonoBehaviour
         if (cursorIndex >= cursorMax) cursorIndex = menuArray.Count() - 1;
         if (cursorIndex != oldCursor)UpdateMenu();
     }
+    public void set_Radius_and_Margin(float r , float m)
+    {
+        radius = r;
+        margin = m;
+    }
+    float radius = 123456789 , margin = -123456789;//floatはnullにできないので、あり得ない数字を代入
+    [SerializeField]float movePos;//上下キーを入力した際にObjectが動く値
     void enemyInfoCursor()//全面的に書き換える必要がある
     {
+        if(radius == 123456789 || margin == -123456789)return;//enemyInformationを持ったObjectがtrueになる前にmoveKeyが切り替わるので、エスケープ処理を入れている
+
         int oldCursor = cursorIndex;
-
-        var len_of_row = 0;//エラーを消すためだけに入れている変数。
-
         int cursorMax = menuArray.Count();
 
         if (isUp)
         {
-            cursorIndex -= len_of_row;
+            if(cursorIndex == 0 && cursorRect.anchoredPosition.y < radius + margin*2)
+            {
+                cursorRect.anchoredPosition += new Vector2(0,movePos);
+            }
             isUp = false;
         }
 
         else if (isDown)
         {
-            cursorIndex += len_of_row;
+            if(cursorIndex == 0 && cursorRect.anchoredPosition.y > -1*(radius + margin))
+            {
+                cursorRect.anchoredPosition += new Vector2(0,-movePos);
+            }
             isDown = false;
         }
 
         else if (isLeft)
         {
+            cursorIndex++;
             isLeft = false;
         }
         
         else if(isRight)
         {
+            cursorIndex--;
             isRight = false;
         }
 

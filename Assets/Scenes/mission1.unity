@@ -171,6 +171,7 @@ MonoBehaviour:
   cursorIndex: 0
   menuArray: []
   cl_rowLentgh: 3
+  movePos: 0
 --- !u!114 &634106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2234,7 +2235,7 @@ MonoBehaviour:
   onImage: {fileID: 0}
   offImage: {fileID: 0}
   enemyName: 
-  emptyObj: {fileID: 1354322794}
+  enemyInfoObj: {fileID: 862163535}
 --- !u!224 &5997829247675174075
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2342,7 +2343,7 @@ MonoBehaviour:
   onImage: {fileID: 0}
   offImage: {fileID: 0}
   enemyName: enemyInformation
-  emptyObj: {fileID: 1354322794}
+  enemyInfoObj: {fileID: 1780301466}
 --- !u!114 &7480578147640357862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2453,7 +2454,7 @@ MonoBehaviour:
   onImage: {fileID: 0}
   offImage: {fileID: 0}
   enemyName: 
-  emptyObj: {fileID: 1354322794}
+  enemyInfoObj: {fileID: 0}
 --- !u!1 &8396143567140053310
 GameObject:
   m_ObjectHideFlags: 0

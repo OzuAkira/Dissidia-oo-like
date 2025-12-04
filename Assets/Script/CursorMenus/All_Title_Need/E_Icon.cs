@@ -7,7 +7,7 @@ public class E_Icon : MenuAbstract
     public string enemyName;
     GameObject gm ;
 
-    public GameObject emptyObj;
+    public GameObject enemyInfoObj;
 
     CursorArow cursorArow;
     CursorMaster cursorMaster;
@@ -21,7 +21,7 @@ public class E_Icon : MenuAbstract
     public override void Select()
     {
 
-        cursorArow.UpdateCursor(emptyObj);//cursorの変更
+        cursorArow.UpdateCursor(enemyInfoObj);//cursorObjectそのものをenemyInformationにする
         cursorMaster.changeKey("enemyInformation");//MoveKey(Menuの更新)のUpdate
         cursorArow.cursorIndex = 0;//indexを初期化
         cursorArow.UpdateMenu();
