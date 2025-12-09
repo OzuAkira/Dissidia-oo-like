@@ -188,6 +188,11 @@ public class CursorArow : MonoBehaviour
             isHoldDown = false;
         }
     }
+    public void setObject(GameObject infoObj)
+    {
+        infoRect = infoObj.GetComponent<RectTransform>();
+    }
+    RectTransform infoRect;
     void enemyInfoCursor()
     {
         if(radius == 123456789 || margin == -123456789)return;//enemyInformationを持ったObjectがtrueになる前にmoveKeyが切り替わるので、エスケープ処理を入れている
@@ -201,49 +206,49 @@ public class CursorArow : MonoBehaviour
         {
             if (isUp)
             {
-                if(cursorRect.anchoredPosition.y < (radius - 450)+margin)//450はカメラから見切れる閾値となる座標（Center Topの相対座標）
+                if(infoRect.anchoredPosition.y < (radius - 450)+margin)//450はカメラから見切れる閾値となる座標（Center Topの相対座標）
                 {
-                    cursorRect.anchoredPosition += new Vector2(0,movePos);
+                    infoRect.anchoredPosition += new Vector2(0,movePos);
                 }
                 else
                 {
-                    cursorRect.anchoredPosition = new Vector2(0,(radius - 450)+margin);
+                    infoRect.anchoredPosition = new Vector2(0,(radius - 450)+margin);
                 }
                 isUp = false;
             }
             else if (isHoldUp)
             {
-                if(cursorRect.anchoredPosition.y < (radius - 450)+margin)//450はカメラから見切れる閾値となる座標（Center Topの相対座標）
+                if(infoRect.anchoredPosition.y < radius - 450+margin)//450はカメラから見切れる閾値となる座標（Center Topの相対座標）
                 {
-                    cursorRect.anchoredPosition += new Vector2(0,movePos/2);
+                    infoRect.anchoredPosition += new Vector2(0,movePos/2);
                 }
                 else
                 {
-                    cursorRect.anchoredPosition = new Vector2(0,(radius - 450)+margin);
+                    infoRect.anchoredPosition = new Vector2(0,(radius - 450)+margin);
                 }
             }
 
             else if (isDown)
             {
-                if(cursorRect.anchoredPosition.y > -1*(radius + margin))
+                if(infoRect.anchoredPosition.y > -1*(radius + margin))
                 {
-                    cursorRect.anchoredPosition += new Vector2(0,-movePos);
+                    infoRect.anchoredPosition += new Vector2(0,-movePos);
                 }
                 else
                 {
-                    cursorRect.anchoredPosition = new Vector2(0,-1*(radius + margin));
+                    infoRect.anchoredPosition = new Vector2(0,-1*(radius + margin));
                 }
                 isDown = false;
             }
             else if (isHoldDown)
             {
-                if(cursorRect.anchoredPosition.y > -1*(radius + margin))
+                if(infoRect.anchoredPosition.y > -1*(radius + margin))
                 {
-                    cursorRect.anchoredPosition += new Vector2(0,-movePos/2);
+                    infoRect.anchoredPosition += new Vector2(0,-movePos/2);
                 }
                 else
                 {
-                    cursorRect.anchoredPosition = new Vector2(0,-1*(radius + margin));
+                    infoRect.anchoredPosition = new Vector2(0,-1*(radius + margin));
                 }
             }
         }
