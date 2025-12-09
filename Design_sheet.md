@@ -127,6 +127,7 @@ class CharactorIcon{
     - CursorMater cursorMaster
     - CursorArow cursorArow
     + GameObject nextCursor
+    + bool isDummy
     - void Start()
     # Void Select() 
 }
@@ -139,12 +140,16 @@ class Icon{
     + int myIndex
     + string selectedCharacterName
     - void Start()
+    - void Update()
     # void Select()
 }
 class Submit{
     # void Select()
 }
 class E_Icon{
+    + string enemyName
+    - GameObject gm
+    - EnemySetting enemySetting
     # void Select()
 }
 class MemberSetting{
@@ -154,12 +159,19 @@ class MemberSetting{
     + void setIndex(int nowIndex,GameObject nowObj)
     + void setCharactor(string selectName)
 }
+class EnemySetting{
+    - MenuDataList menuDataList
+    - GameObject[] windowObj
+    - void Start():addMenu
+    
+}
 class MenuDataList{
     - GameObject[] homeObj
     - GameObject[] charactorListObj
     + Dictionary &lt string,GameObject[] &gt menuStrage
     - void Awake()
-    + void addMenu()
+    + void addMenu(string keyName , GameObject[] menu)
+    + void updateCharactorMenu(string keyName)
 }
 
 
@@ -186,6 +198,10 @@ CharactorIcon ..|> CursorArow :cursorIndex = myIndex
 CharactorIcon ..|> CursorMaster :chageKey("home")
 
 CursorMaster -- MenuDataList
+MenuDataList --|> MemberSetting :nameArrayを取得
+MenuDataList --|> CharactorIcon :isDummyを判定
 
 CursorArow ..|> MenuAbstract : do-select()
+
+EnemySetting ..|> MenuDataList : Start()でaddMenu()をループで数回実行
 ```
