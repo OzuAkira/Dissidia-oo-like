@@ -138,12 +138,12 @@ public class CursorArow : MonoBehaviour
         }
         else if (isLeft)
         {
-            if ((cursorIndex+1) % (len_of_row + 1) != 0)cursorIndex--;//cursorIndex が len_of_row+1の倍数「ではない」とき
+            if (cursorIndex % (len_of_row+1) != 0 )cursorIndex--;//cursorIndex が len_of_row+1の倍数「ではない」とき
             isLeft = false;
         }
         else if(isRight)
         {
-            if ((cursorIndex+1) % len_of_row != 0)cursorIndex++;
+            if (cursorIndex % len_of_row != 0 || cursorIndex == 0)cursorIndex++;
             isRight = false;
         }
 
