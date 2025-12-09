@@ -28,10 +28,10 @@ public class CursorArow : MonoBehaviour
         cursorRect = cursorObject.GetComponent<RectTransform>();
         UpdateMenu();
     }
-
+    Vector2 axis;
     public void OnMove(InputValue value)
     {
-        var axis = value.Get<Vector2>();
+        axis = value.Get<Vector2>();
         if (axis.y == 1 && isDown == false) isUp = true;
         else if (axis.y == -1 && isUp == false) isDown = true;
         else if (axis.x == 1 && isRight == false) isRight = true;
@@ -151,39 +151,101 @@ public class CursorArow : MonoBehaviour
         if (cursorIndex >= cursorMax) cursorIndex = menuArray.Count() - 1;
         if (cursorIndex != oldCursor)UpdateMenu();
     }
-    public void set_Radius_and_Margin(float r , float m)
+    public void set_Radius_and_Margin(float r , float m , bool over)
     {
         radius = r;
         margin = m;
+        isOver = over;//オブジェクトの全長が画面内に収まるが否かを判定
     }
     float radius = 123456789 , margin = -123456789;//floatはnullにできないので、あり得ない数字を代入
     [SerializeField]float movePos;//上下キーを入力した際にObjectが動く値
-    void enemyInfoCursor()//全面的に書き換える必要がある
+    bool isHoldUp = false , isHoldDown = false , isOver = false;
+    int frame = 0;
+    public int onHoldFrame;
+    void getHold()
+    {
+        if(axis.y > 0)
+        {
+            frame++;
+            if(frame < onHoldFrame) isHoldUp = true;
+        }
+        else
+        {
+            frame = 0;
+            isHoldUp = false;
+        }
+        if(axis.y < 0)
+        {
+            frame++;
+            if(frame < onHoldFrame) isHoldDown = true;
+        }
+        else
+        {
+            frame = 0;
+            isHoldDown = false;
+        }
+    }
+    void enemyInfoCursor()
     {
         if(radius == 123456789 || margin == -123456789)return;//enemyInformationを持ったObjectがtrueになる前にmoveKeyが切り替わるので、エスケープ処理を入れている
 
         int oldCursor = cursorIndex;
         int cursorMax = menuArray.Count();
+        getHold();
+        
 
-        if (isUp)
+        if(cursorIndex == 0 && isOver)
         {
-            if(cursorIndex == 0 && cursorRect.anchoredPosition.y < radius + margin*2)
+            if (isUp)
             {
-                cursorRect.anchoredPosition += new Vector2(0,movePos);
+                if(cursorRect.anchoredPosition.y < (radius - 450)+margin)//450はカメラから見切れる閾値となる座標（Center Topの相対座標）
+                {
+                    cursorRect.anchoredPosition += new Vector2(0,movePos);
+                }
+                else
+                {
+                    cursorRect.anchoredPosition = new Vector2(0,(radius - 450)+margin);
+                }
+                isUp = false;
             }
-            isUp = false;
+            else if (isHoldUp)
+            {
+                if(cursorRect.anchoredPosition.y < (radius - 450)+margin)//450はカメラから見切れる閾値となる座標（Center Topの相対座標）
+                {
+                    cursorRect.anchoredPosition += new Vector2(0,movePos/2);
+                }
+                else
+                {
+                    cursorRect.anchoredPosition = new Vector2(0,(radius - 450)+margin);
+                }
+            }
+
+            else if (isDown)
+            {
+                if(cursorRect.anchoredPosition.y > -1*(radius + margin))
+                {
+                    cursorRect.anchoredPosition += new Vector2(0,-movePos);
+                }
+                else
+                {
+                    cursorRect.anchoredPosition = new Vector2(0,-1*(radius + margin));
+                }
+                isDown = false;
+            }
+            else if (isHoldDown)
+            {
+                if(cursorRect.anchoredPosition.y > -1*(radius + margin))
+                {
+                    cursorRect.anchoredPosition += new Vector2(0,-movePos/2);
+                }
+                else
+                {
+                    cursorRect.anchoredPosition = new Vector2(0,-1*(radius + margin));
+                }
+            }
         }
 
-        else if (isDown)
-        {
-            if(cursorIndex == 0 && cursorRect.anchoredPosition.y > -1*(radius + margin))
-            {
-                cursorRect.anchoredPosition += new Vector2(0,-movePos);
-            }
-            isDown = false;
-        }
-
-        else if (isLeft)
+        if (isLeft)
         {
             cursorIndex++;
             isLeft = false;

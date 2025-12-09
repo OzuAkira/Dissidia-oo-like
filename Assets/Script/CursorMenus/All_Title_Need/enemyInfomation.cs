@@ -8,6 +8,7 @@ public class enemyInfomation : MenuAbstract
 
     CursorArow cursorArow;
     GameObject gm;
+    bool isOver;
     void Awake()
     {
         gameObject.SetActive(false);
@@ -18,12 +19,21 @@ public class enemyInfomation : MenuAbstract
         rectTransform = GetComponent<RectTransform>();
         cursorArow = gm.GetComponent<CursorArow>();
 
-        rectTransform.anchoredPosition = new Vector2(0,(rectTransform.sizeDelta.y/2 - margin)*-1);//RectTransformのHeightの値÷2をマイナスにしてY座標にする
-
-        cursorArow.set_Radius_and_Margin(rectTransform.sizeDelta.y/2,margin);
+        if(rectTransform.sizeDelta.y > 390)
+        {
+            isOver = true;
+            rectTransform.anchoredPosition = new Vector2(0,(rectTransform.sizeDelta.y/2 + margin)*-1);//RectTransformのHeightの値÷2をマイナスにしてY座標にする
+        }
+        else
+        {
+            isOver = false;
+            rectTransform.anchoredPosition = new Vector2(0,-225);//カメラに映る範囲の縦の長さが450なので、その半分の-225の座標に移動
+        }
+        cursorArow.UpdateCursor(gameObject);
+        cursorArow.set_Radius_and_Margin(rectTransform.sizeDelta.y/2 , margin , isOver);
     }
     public override void Select()
     {
-        Debug.Log("【なにもないよ】");
+        
     }
 }
