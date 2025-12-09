@@ -121,24 +121,27 @@ public class CursorArow : MonoBehaviour
         if (cursorIndex >= cursorMax) cursorIndex = menuArray.Count() - 1;
         if (cursorIndex != oldCursor) UpdateMenu();
     }
-    
+    public int row = 0;
     void charactorCursor(int len_of_row)
     {
         int oldCursor = cursorIndex;
         int cursorMax = menuArray.Count();
-        if (isUp)
+        if (isUp && cursorIndex != 0)
         {
+            if(row > 0)row--;
             cursorIndex -= len_of_row;
             isUp = false;
         }
-        else if (isDown)
+        else if (isDown && cursorIndex != 0)
         {
+            if(row < (cursorMax-2) / len_of_row)row++;
+
             cursorIndex += len_of_row;
             isDown = false;
         }
         else if (isLeft)
         {
-            if (cursorIndex % (len_of_row+1) != 0 )cursorIndex--;//cursorIndex が len_of_row+1の倍数「ではない」とき
+            if (cursorIndex != len_of_row * row + 1 || cursorIndex == 1)cursorIndex--;
             isLeft = false;
         }
         else if(isRight)
