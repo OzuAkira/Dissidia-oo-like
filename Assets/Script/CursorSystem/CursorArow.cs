@@ -70,7 +70,7 @@ public class CursorArow : MonoBehaviour
     public void UpdateCursor(GameObject newCursorObj)
     {
         cursorObject = newCursorObj;
-        
+        cursorObject.SetActive(true);
         cursorRect = cursorObject.GetComponent<RectTransform>();
     }
     public void UpdateMenu()

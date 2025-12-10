@@ -9,6 +9,7 @@ public class MenuDataList : MonoBehaviour
     [SerializeField] private GameObject[] charactorListObj;//
 
     [SerializeField] GameObject[] enemy_0_InfoObj , enemy_1_InfoObj , enemy_2_InfoObj;//各敵の情報を入れる
+    public bool isEnemy1 = false , isEnemy2 = false;
 
     void Awake()
     {
@@ -18,8 +19,16 @@ public class MenuDataList : MonoBehaviour
 
         
         addMenu("enemy_0_Info",enemy_0_InfoObj);
-        if(enemy_1_InfoObj != null)addMenu("enemy_1_Info",enemy_1_InfoObj);
-        if(enemy_2_InfoObj != null)addMenu("enemy_2_Info",enemy_2_InfoObj);
+        if(enemy_1_InfoObj != null)
+        {
+            addMenu("enemy_1_Info",enemy_1_InfoObj);
+            isEnemy1 = true;
+        }
+        if(enemy_2_InfoObj != null)
+        {
+            addMenu("enemy_2_Info",enemy_2_InfoObj);
+            isEnemy2 = true;
+        }
     }
     
     public Dictionary<string, GameObject[]> menuStrage = new Dictionary<string, GameObject[]>();

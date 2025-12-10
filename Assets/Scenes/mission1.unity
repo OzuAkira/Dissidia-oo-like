@@ -240,6 +240,8 @@ MonoBehaviour:
   - {fileID: 862163535}
   - {fileID: 215190739}
   enemy_2_InfoObj: []
+  isEnemy1: 0
+  isEnemy2: 0
 --- !u!114 &634108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onImage: {fileID: 0}
   offImage: {fileID: 0}
+  homeCursor: {fileID: 1095000619}
 --- !u!1 &304547827
 GameObject:
   m_ObjectHideFlags: 0
