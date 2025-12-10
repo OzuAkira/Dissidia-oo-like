@@ -126,7 +126,18 @@ public class CursorArow : MonoBehaviour
     {
         int oldCursor = cursorIndex;
         int cursorMax = menuArray.Count();
-        if (isUp && cursorIndex != 0)
+
+        if (isLeft)
+        {
+            if (cursorIndex != len_of_row * row + 1 || cursorIndex == 1)cursorIndex--;
+            isLeft = false;
+        }
+        else if(isRight)
+        {
+            if (cursorIndex % len_of_row != 0 || cursorIndex == 0)cursorIndex++;
+            isRight = false;
+        }
+        else if (isUp && cursorIndex != 0)
         {
             if(row > 0)row--;
             cursorIndex -= len_of_row;
@@ -139,17 +150,11 @@ public class CursorArow : MonoBehaviour
             cursorIndex += len_of_row;
             isDown = false;
         }
-        else if (isLeft)
+        else if(cursorIndex == 0)
         {
-            if (cursorIndex != len_of_row * row + 1 || cursorIndex == 1)cursorIndex--;
-            isLeft = false;
+            return;
         }
-        else if(isRight)
-        {
-            if (cursorIndex % len_of_row != 0 || cursorIndex == 0)cursorIndex++;
-            isRight = false;
-        }
-
+        
         if (cursorIndex < 0) cursorIndex = 0;
         if (cursorIndex >= cursorMax) cursorIndex = menuArray.Count() - 1;
         if (cursorIndex != oldCursor)UpdateMenu();
