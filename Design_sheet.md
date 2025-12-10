@@ -83,6 +83,9 @@
 ```mermaid
 classDiagram
 
+class Submit{
+    # void Select()
+}
 class MenuAbstract{
     - Image image
     + Sprit onImage
@@ -92,6 +95,7 @@ class MenuAbstract{
     + void OffImage()
     # void Select()
 }
+
 class CursorArow{
     - bool isUp
     - bool isDown
@@ -100,18 +104,26 @@ class CursorArow{
     - GameObject startCursor
     - RectTransform cursorRect
     - CursorMaster cursorMaster
+    - float radius
+    - float margin
+    - bool isHoldUp
+    - bool isHoldDown
+    - bool isOver
     + GameObject cursorObject
     + int cursorIndex
     + List &lt MenuAbstract &gt menuArray
     - void Start()
-    - void switchingMethod()
-    - void Updat()
+    - void switchingMethod(string key)
+    - void Update()
     - void OnFire()
+    - void getHold()
     - void homeCursor()
-    - void charactorCursor()
+    - void charactorCursor(int len_of_row)
+    - void enemyInfoCursor()
     + void OnMove()
-    + void UpdateCursor()
+    + void UpdateCursor(GameObject newCursorObj)
     + void UpdateMenu()
+    + void set_Radius_and_Margin(float r , float m , bool over)
 }
 class CursorMaster{
     - MenuDataList menuDataList
@@ -143,13 +155,14 @@ class Icon{
     - void Update()
     # void Select()
 }
-class Submit{
-    # void Select()
-}
+
 class E_Icon{
     + string enemyName
+    + GameObject enemyInfoObj
     - GameObject gm
-    - EnemySetting enemySetting
+    - CursorArow cursorArow
+    - CursorMaster cursorMaster
+    - void Start()
     # void Select()
 }
 class MemberSetting{
@@ -159,12 +172,6 @@ class MemberSetting{
     + void setIndex(int nowIndex,GameObject nowObj)
     + void setCharactor(string selectName)
 }
-class EnemySetting{
-    - MenuDataList menuDataList
-    - GameObject[] windowObj
-    - void Start():addMenu
-    
-}
 class MenuDataList{
     - GameObject[] homeObj
     - GameObject[] charactorListObj
@@ -173,7 +180,16 @@ class MenuDataList{
     + void addMenu(string keyName , GameObject[] menu)
     + void updateCharactorMenu(string keyName)
 }
-
+class enemyInfomation{
+    - float margin
+    - RectTransform rectTransform
+    - CursorArow cursorArow
+    - GameObject gm
+    - bool isOver
+    - void Awake()
+    - void Start() 画面から見切れるか否かを判定
+    # void Select() null
+}
 
 
 MenuAbstract --> CharactorIcon
@@ -203,5 +219,13 @@ MenuDataList --|> CharactorIcon :isDummyを判定
 
 CursorArow ..|> MenuAbstract : do-select()
 
-EnemySetting ..|> MenuDataList : Start()でaddMenu()をループで数回実行
+enemyInfomation --> CursorArow : UpdateCursor(gameObject)
+enemyInfomation --> CursorArow : set_Radius_and_Margin(rectTransform.sizeDelta.y/2 , margin , isOver)
+
+E_Icon ..|> CursorArow : UpdateCursor(enemyInfoObj)
+E_Icon ..|> CursorArow : UpdateMenu()
+E_Icon ..|> CursorArow : cursorIndex = 0
+E_Icon ..|> CursorMaster : changeKey("enemyInformation")
+
+
 ```

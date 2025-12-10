@@ -38,7 +38,33 @@ public class CursorMaster : MonoBehaviour
                 {
                     obj.SetActive(false);
                 }
+
+                foreach (GameObject obj in menuDataList.menuStrage["enemy_0_Info"])
+                {
+                    obj.SetActive(false);
+                }
+
+                if(menuDataList.isEnemy2 == true)
+                {
+                    foreach (GameObject obj in menuDataList.menuStrage["enemy_1_Info"])
+                    {
+                        obj.SetActive(false);
+                    }
+                    foreach (GameObject obj in menuDataList.menuStrage["enemy_2_Info"])
+                    {
+                        obj.SetActive(false);
+                    }
+                }
+                else if(menuDataList.isEnemy1 == true)
+                {
+                    foreach (GameObject obj in menuDataList.menuStrage["enemy_1_Info"])
+                    {
+                        obj.SetActive(false);
+                    }
+                }
+                
                 break;
+
             case "charactorList":
                 
                 foreach (GameObject obj in menuDataList.menuStrage["mission1/home"])
