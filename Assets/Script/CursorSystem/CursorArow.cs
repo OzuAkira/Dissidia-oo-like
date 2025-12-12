@@ -36,6 +36,17 @@ public class CursorArow : MonoBehaviour
         else if (axis.y == -1 && isUp == false) isDown = true;
         else if (axis.x == 1 && isRight == false) isRight = true;
         else if (axis.x == -1 && isLeft == false) isLeft = true;
+
+        if(axis.y == 0)
+        {
+            isUp = false;
+            isDown = false;
+        }
+        if(axis.x == 0)
+        {
+            isLeft = false;
+            isRight = false;
+        }
     }
 
     [SerializeField] int cl_rowLentgh;//【重要な変数】キャラクターリストのIconが改行する場所を指定している //1_origin で指定すること
@@ -127,6 +138,8 @@ public class CursorArow : MonoBehaviour
         int oldCursor = cursorIndex;
         int cursorMax = menuArray.Count();
 
+
+        
         if (isLeft)
         {
             if (cursorIndex != len_of_row * row + 1 || cursorIndex == 1)cursorIndex--;
@@ -137,23 +150,24 @@ public class CursorArow : MonoBehaviour
             if (cursorIndex % len_of_row != 0 || cursorIndex == 0)cursorIndex++;
             isRight = false;
         }
-        else if (isUp && cursorIndex != 0)
+        
+        else if(cursorIndex == 0)
+        {
+            return;
+        }
+        else if (isUp)
         {
             if(row > 0)row--;
             cursorIndex -= len_of_row;
             isUp = false;
         }
-        else if (isDown && cursorIndex != 0)
+        else if (isDown)
         {
             if(row < (cursorMax-2) / len_of_row)row++;
-
             cursorIndex += len_of_row;
             isDown = false;
         }
-        else if(cursorIndex == 0)
-        {
-            return;
-        }
+        
         
         if (cursorIndex < 0) cursorIndex = 0;
         if (cursorIndex >= cursorMax) cursorIndex = menuArray.Count() - 1;
