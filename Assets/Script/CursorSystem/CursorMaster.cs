@@ -25,7 +25,7 @@ public class CursorMaster : MonoBehaviour
         {
             case "home":
                 cursorArow.menuArray = new List<MenuAbstract>();//ここでMenuをリセット
-                foreach (GameObject obj in menuDataList.menuStrage["mission1/home"])
+                foreach (GameObject obj in menuDataList.menuStrage[$"{gameObject.scene.name}/home"])
                 {
                     obj.SetActive(true);
                     image = obj.GetComponent<Image>();
@@ -67,7 +67,7 @@ public class CursorMaster : MonoBehaviour
 
             case "charactorList":
                 
-                foreach (GameObject obj in menuDataList.menuStrage["mission1/home"])
+                foreach (GameObject obj in menuDataList.menuStrage[$"{gameObject.scene.name}/home"])
                 {
                     obj.SetActive(true);
 
@@ -91,7 +91,7 @@ public class CursorMaster : MonoBehaviour
                 int enemyNum = cursorArow.cursorIndex - 3;
                 cursorArow.menuArray = new List<MenuAbstract>();
 
-                foreach (GameObject obj in menuDataList.menuStrage["mission1/home"])
+                foreach (GameObject obj in menuDataList.menuStrage[$"{gameObject.scene.name}/home"])
                 {
                     obj.SetActive(true);
 
